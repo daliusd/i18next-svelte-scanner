@@ -1,0 +1,47 @@
+{
+  "name": "i18next-svelte-scanner",
+  "version": "0.0.1",
+  "description": "i18next Svelte scanner",
+  "main": "scanner.js",
+  "scripts": {
+    "test": "npx jest --coverage --watch"
+  },
+  "bin": {
+    "i18next-svelte-scanner": "./scanner.js"
+  },
+  "keywords": [
+    "i18next",
+    "svelte",
+    "scanner"
+  ],
+  "author": "Dalius Dobravolskas <dalius.dobravolskas@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "commander": "^3.0.2",
+    "i18next": "^17.0.16",
+    "svelte": "^3.12.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.4.0",
+    "eslint-plugin-jest": "^22.17.0",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.0",
+    "prettier": "^1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npx jest"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
+  }
+}
