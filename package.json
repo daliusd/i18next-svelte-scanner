@@ -1,6 +1,6 @@
 {
   "name": "i18next-svelte-scanner",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "i18next Svelte scanner",
   "main": "scanner.js",
   "scripts": {

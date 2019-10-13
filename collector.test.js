@@ -25,6 +25,36 @@ describe('collectStrings', () => {
         expect(strings[1].pluralize).toBeFalsy();
     });
 
+    it('values written using back ticks', () => {
+        let sourceCode = `
+        <script>
+            import { _ } from './l10n.js';
+            $: a = _('key', \`value\`);
+            </script>
+        <style>
+
+        </style>
+
+        <span>{$_('key2', \`value2
+        test\`)}</span>
+        <span>{$_('key3', \`\`)}</span>
+        `;
+
+        const strings = collectStrings(sourceCode);
+        expect(strings.length).toBe(3);
+        expect(strings[0].key).toEqual('key');
+        expect(strings[0].defaultValue).toEqual('value');
+        expect(strings[0].pluralize).toBeFalsy();
+
+        expect(strings[1].key).toEqual('key2');
+        expect(strings[1].defaultValue).toEqual('value2\n        test');
+        expect(strings[1].pluralize).toBeFalsy();
+
+        expect(strings[2].key).toEqual('key3');
+        expect(strings[2].defaultValue).toEqual('');
+        expect(strings[2].pluralize).toBeFalsy();
+    });
+
     it('pluralization support', () => {
         let sourceCode = `
         <script>

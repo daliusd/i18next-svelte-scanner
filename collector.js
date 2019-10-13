@@ -13,6 +13,8 @@ function collectStrings(sourceCode) {
 
             if (node.arguments[1].type === 'Literal') {
                 result.defaultValue = node.arguments[1].value;
+            } else if (node.arguments[1].type === 'TemplateLiteral') {
+                result.defaultValue = node.arguments[1].quasis[0].value.raw;
             } else if (node.arguments[1].type === 'ObjectExpression') {
                 let properties = node.arguments[1].properties;
                 for (const prop of properties) {
