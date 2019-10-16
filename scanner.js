@@ -30,6 +30,10 @@ if (!program.sourceDir || !program.outputFile) {
     program.outputHelp();
 } else {
     walkTree(program.sourceDir);
-    let object = convertToObject(collectedStrings);
+    let [object, err] = convertToObject(collectedStrings);
     fs.writeFileSync(program.outputFile, JSON.stringify(object, null, 4));
+
+    if (err.length) {
+        console.error(err.join('\n'));
+    }
 }

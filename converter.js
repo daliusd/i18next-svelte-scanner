@@ -1,6 +1,7 @@
 function convertToObject(collectedStrings) {
     collectedStrings.sort((a, b) => a.key.localeCompare(b.key));
     let result = {};
+    let err = [];
 
     for (const locStr of collectedStrings) {
         let parent = result;
@@ -16,13 +17,22 @@ function convertToObject(collectedStrings) {
                 parent = result[subKey];
             }
         }
-        parent[key] = locStr.defaultValue || '';
+        let defaultValue = locStr.defaultValue || '';
+
+        if (key in parent) {
+            if (locStr.defaultValue && parent[key] !== defaultValue) {
+                err.push(`"${key}" has different default values "${parent[key]}" and "${defaultValue}"`);
+            }
+        } else {
+            parent[key] = defaultValue;
+        }
+
         if (locStr.pluralize) {
             parent[`${key}_plural`] = '';
         }
     }
 
-    return result;
+    return [result, err];
 }
 
 module.exports = {
