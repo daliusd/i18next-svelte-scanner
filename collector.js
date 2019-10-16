@@ -11,17 +11,19 @@ function collectStrings(sourceCode) {
 
             let result = { key: node.arguments[0].value, pluralize: false };
 
-            if (node.arguments[1].type === 'Literal') {
-                result.defaultValue = node.arguments[1].value;
-            } else if (node.arguments[1].type === 'TemplateLiteral') {
-                result.defaultValue = node.arguments[1].quasis[0].value.raw;
-            } else if (node.arguments[1].type === 'ObjectExpression') {
-                let properties = node.arguments[1].properties;
-                for (const prop of properties) {
-                    if (prop.key.name === 'count') {
-                        result.pluralize = true;
-                    } else if (prop.key.name === 'defaultValue' && prop.value.type === 'Literal') {
-                        result.defaultValue = prop.value.value;
+            if (node.arguments.length > 1) {
+                if (node.arguments[1].type === 'Literal') {
+                    result.defaultValue = node.arguments[1].value;
+                } else if (node.arguments[1].type === 'TemplateLiteral') {
+                    result.defaultValue = node.arguments[1].quasis[0].value.raw;
+                } else if (node.arguments[1].type === 'ObjectExpression') {
+                    let properties = node.arguments[1].properties;
+                    for (const prop of properties) {
+                        if (prop.key.name === 'count') {
+                            result.pluralize = true;
+                        } else if (prop.key.name === 'defaultValue' && prop.value.type === 'Literal') {
+                            result.defaultValue = prop.value.value;
+                        }
                     }
                 }
             }

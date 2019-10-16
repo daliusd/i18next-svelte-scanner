@@ -25,6 +25,30 @@ describe('collectStrings', () => {
         expect(strings[1].pluralize).toBeFalsy();
     });
 
+    it('finds keys without default values', () => {
+        let sourceCode = `
+        <script>
+            import { _ } from './l10n.js';
+            $: a = _('key');
+        </script>
+        <style>
+
+        </style>
+
+        <span>{$_('key2')}</span>
+        `;
+
+        const strings = collectStrings(sourceCode);
+        expect(strings.length).toBe(2);
+        expect(strings[0].key).toEqual('key');
+        expect(strings[0].defaultValue).toBeUndefined();
+        expect(strings[0].pluralize).toBeFalsy();
+
+        expect(strings[1].key).toEqual('key2');
+        expect(strings[1].defaultValue).toBeUndefined();
+        expect(strings[1].pluralize).toBeFalsy();
+    });
+
     it('values written using back ticks', () => {
         let sourceCode = `
         <script>
