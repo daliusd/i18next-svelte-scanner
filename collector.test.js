@@ -5,7 +5,7 @@ describe('collectStrings', () => {
         let sourceCode = `
         <script>
             import { _ } from './l10n.js';
-            $: a = _('key', 'value');
+            $: a = $_('key', 'value');
         </script>
         <style>
 
@@ -29,7 +29,7 @@ describe('collectStrings', () => {
         let sourceCode = `
         <script>
             import { _ } from './l10n.js';
-            $: a = _('key');
+            $: a = $_('key');
         </script>
         <style>
 
@@ -53,7 +53,7 @@ describe('collectStrings', () => {
         let sourceCode = `
         <script>
             import { _ } from './l10n.js';
-            $: a = _('key', \`value\`);
+            $: a = $_('key', \`value\`);
             </script>
         <style>
 
@@ -85,7 +85,7 @@ describe('collectStrings', () => {
             import { _ } from './l10n.js';
             export let x;
 
-            $: a = _('key', { count: x });
+            $: a = $_('key', { count: x });
         </script>
         <style>
 
@@ -111,7 +111,7 @@ describe('collectStrings', () => {
             import { _ } from './l10n.js';
             export let x;
 
-            $: a = _('key', { defaultValue: 'value' });
+            $: a = $_('key', { defaultValue: 'value' });
         </script>
         <style>
 

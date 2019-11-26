@@ -34,7 +34,7 @@ function collectStrings(sourceCode) {
 
     svelte.walk(ast.instance, {
         enter(node) {
-            verifyNode(node, '_');
+            verifyNode(node, '$_');
         },
     });
 
