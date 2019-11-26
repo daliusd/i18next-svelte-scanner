@@ -21,7 +21,11 @@ function convertToObject(collectedStrings) {
 
         if (key in parent) {
             if (locStr.defaultValue && parent[key] !== defaultValue) {
-                err.push(`"${key}" has different default values "${parent[key]}" and "${defaultValue}"`);
+                if (parent[key] === '') {
+                    parent[key] = defaultValue;
+                } else {
+                    err.push(`"${key}" has different default values "${parent[key]}" and "${defaultValue}"`);
+                }
             }
         } else {
             parent[key] = defaultValue;

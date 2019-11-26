@@ -31,6 +31,18 @@ describe('convertToObject', () => {
         expect(err.length).toEqual(1);
     });
 
+    it('flat case with same key but different default values. First one is empty', () => {
+        const [obj, err] = convertToObject([{ key: 'key', defaultValue: '' }, { key: 'key', defaultValue: 'test2' }]);
+        expect(JSON.stringify(obj)).toEqual('{"key":"test2"}');
+        expect(err.length).toEqual(0);
+    });
+
+    it('flat case with same key but different default values. Second one is empty', () => {
+        const [obj, err] = convertToObject([{ key: 'key', defaultValue: 'test' }, { key: 'key', defaultValue: '' }]);
+        expect(JSON.stringify(obj)).toEqual('{"key":"test"}');
+        expect(err.length).toEqual(0);
+    });
+
     it('flat case with pluralization', () => {
         const [obj, err] = convertToObject([{ key: 'key', pluralize: true }]);
         expect(JSON.stringify(obj)).toEqual('{"key":"","key_plural":""}');
