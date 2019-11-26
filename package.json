@@ -4,7 +4,7 @@
   "description": "i18next Svelte scanner",
   "main": "scanner.js",
   "scripts": {
-    "test": "npx jest --coverage --watch"
+    "test": "npx jest --coverage --watchAll"
   },
   "bin": {
     "i18next-svelte-scanner": "./scanner.js"
